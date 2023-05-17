@@ -5,13 +5,14 @@
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Scanner;
+import java.util.*;
 
 // TODO: 11.02.2023
 //  После того как ты закончил предыдущий метод можешь приступить к следуещему.
 //  Вся суть printAllCities() заключается в том, что надо вывести все города на консоль.
 public class CityMethodsImpl implements CityMethods {
 
+//    private static City[] usingCity = new City[1109];
 
     @Override
     public City[] readFile() {
@@ -20,19 +21,17 @@ public class CityMethodsImpl implements CityMethods {
         try {
             FileReader reader = new FileReader("city_ru.csv");
             Scanner scanner = new Scanner(reader);
-
             while (scanner.hasNext()) {
                 String[] check = scanner.nextLine().split(";");
-//            City.addToCityList(
-//                    new City(check[0],check[1],check[2],Integer.parseInt(check[3]),check[4])
-//            );
-
                 City city = new City();
-                city.setID(Integer.parseInt(check[0]));
+                // filing City with info
+                city.setId(Integer.parseInt(check[0]));
                 city.setName(check[1]);
-                city.setRegion(check[2]);
-                city.setDistrict(check[3]);
+                city.setDistrict(check[2]);
+                city.setRegion(check[3]);
                 city.setPopulation(Integer.parseInt(check[4]));
+                // some Cities don't have foundation date
+                // catching null pointer exception for date of foundation
                 try {
                     city.setFoundation(check[5]);
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -44,7 +43,7 @@ public class CityMethodsImpl implements CityMethods {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-            return usingCity;
+        return usingCity;
     }
 
     @Override
@@ -56,11 +55,26 @@ public class CityMethodsImpl implements CityMethods {
 
     @Override
     public void groupByRegion(City[] cities) {
-
+        List<City> newCities = new ArrayList<>();
+        for (int i = 0; i < cities.length; i++) {
+            if (cities[i] != null) {
+                newCities.add(cities[i]);
+                for (int j = i + 1; j < cities.length - 1; j++) {
+                    if(cities[j] != null) {
+                        if (cities[i].getRegion().equalsIgnoreCase(cities[j].getRegion())) {
+                            newCities.add(cities[j]);
+                            cities[j] = null;
+                        }
+                    }
+                }
+            }
+        }
+        Arrays.stream(newCities.toArray(new City[1109])).forEach(System.out::println);
     }
 
     @Override
     public void searchByName(String name) {
-
+        City[] cities = readFile();
+        System.out.println(Arrays.stream(cities).filter(x -> x.getName().equals(name)).findFirst().get());
     }
 }

@@ -3,7 +3,7 @@
 //  ID, NAME, REGION, DISTRICT, POPULATION, FOUNDATION.
 //  Класс должен отвечать принципу инкапсуляции и иметь метод toString().
 public class City {
-    private int ID;
+    private int id;
     private String name;
     private String region;
     private String district;
@@ -35,12 +35,12 @@ public class City {
 //        City.cityList.add(city);
 //    }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -86,6 +86,6 @@ public class City {
 //1;Адыгейск;Адыгея;Южный;12248;1973
     @Override
     public String toString(){
-        return getID() + ";" + getName() + ";" + getRegion() + ";" + getDistrict() + ";" + getPopulation() + ";" + getFoundation();
+        return getId() + ";" + getName() + ";" + getRegion() + ";" + getDistrict() + ";" + getPopulation() + ";" + getFoundation();
     }
 }
