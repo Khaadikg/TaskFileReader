@@ -10,30 +10,7 @@ public class City {
     private int population;
     private String foundation;
 
-// Использование Листов облегчило бы написание кода!
-//    private static ArrayList<City> cityList = new ArrayList<>();
-
     public City() {}
-    // Я бы создавал обьект все же через конструктор
-//    public City(int ID, String name, String region, String district, int population, String foundation) {
-//        // Я дуал ID будет с автозаполнением
-//        this.ID++;
-//        this.ID = ID;
-//        this.name = name;
-//        this.region = region;
-//        this.district = district;
-//        this.population = population;
-//        this.foundation = foundation;
-//    }
-
-
-//    public static ArrayList<City> getCityList() {
-//        return cityList;
-//    }
-//
-//    protected static void addToCityList(City city) {
-//        City.cityList.add(city);
-//    }
 
     public int getId() {
         return id;
